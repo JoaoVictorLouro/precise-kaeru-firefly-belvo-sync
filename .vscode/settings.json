@@ -1,0 +1,85 @@
+{
+  "editor.tabSize": 2,
+  "prettier.documentSelectors": ["*.ts", "*.js", "*.html", "*.sh", "*.json", "*.jsonc", "*.yaml", "*.yml", "*.svelte"],
+  "svelte.enable-ts-plugin": true,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    ".svelte-kit": true,
+    "**/.svelte-kit": true,
+    "**/node_modules": true,
+    "node_modules": true,
+    "**/build": true,
+    "build": true,
+    "**/dist": true,
+    "dist": true,
+    "**/coverage": true,
+    "coverage": true
+  },
+  "explorerExclude.backup": {},
+  "eslint.format.enable": true,
+  "eslint.validate": ["javascript", "typescript", "svelte"],
+  "eslint.probe": ["javascript", "typescript", "svelte"],
+  "i18n-ally.enabledFrameworks": ["svelte"],
+  "i18n-ally.displayLanguage": "en",
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.localesPaths": ["./packages/*/src/locales", "./packages/*/src/lib/locales"],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.keepFulfilled": true,
+  "i18n-ally.translate.engines": ["google"],
+  "i18n-ally.extract.keyPrefix": "",
+  "typescript.preferences.importModuleSpecifier": "relative"
+}

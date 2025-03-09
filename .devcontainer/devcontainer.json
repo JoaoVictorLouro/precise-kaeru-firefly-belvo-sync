@@ -1,0 +1,54 @@
+{
+  "name": "firefly-belvo-devenv",
+  "dockerComposeFile": ["./dev-env/docker-compose.yml"],
+  "service": "firefly_belvo_devcontainer",
+  "workspaceFolder": "/workspace",
+  "postCreateCommand": "zsh .devcontainer/dev-env/setup-dev-env.sh",
+  "postStartCommand": "zsh .devcontainer/dev-env/on-dev-env-start.sh",
+  "shutdownAction": "stopCompose",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker": {}
+  },
+  "portsAttributes": {
+    "5173": {
+      "label": "DesktopAppViteServer",
+      "onAutoForward": "ignore",
+      "requireLocalPort": true
+    }
+  },
+  "forwardPorts": [5173],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "/bin/zsh"
+          }
+        }
+      },
+      "extensions": [
+        "adam-bender.commit-message-editor",
+        "christian-kohler.path-intellisense",
+        "dbaeumer.vscode-eslint",
+        "donjayamanne.githistory",
+        "dotjoshjohnson.xml",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "fr43nk.seito-openfile",
+        "github.copilot-labs",
+        "github.copilot",
+        "metaseed.metago",
+        "metaseed.metajump",
+        "metaseed.metaword",
+        "mgmcdermott.vscode-language-babel",
+        "ms-azuretools.vscode-docker",
+        "npxms.hide-gitignored",
+        "oderwat.indent-rainbow",
+        "PeterSchmalfeldt.explorer-exclude",
+        "wallabyjs.console-ninja",
+        "wallabyjs.quokka-vscode"
+      ]
+    }
+  }
+}

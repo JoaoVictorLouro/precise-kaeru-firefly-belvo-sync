@@ -1,0 +1,74 @@
+{
+  "name": "firefly-belvo-sync",
+  "version": "0.0.1",
+  "description": "Docker container that syncs firefly with data pulled from Belvo",
+  "displayName": "Firefly Belvo Sync",
+  "homepage": "https://codingkitsune.com",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "author": {
+    "email": "contact@codingkitsune.com",
+    "name": "CodingKitsune",
+    "url": "https://codingkitsune.com"
+  },
+  "categories": [
+    "Extension Packs",
+    "Other"
+  ],
+  "keywords": [
+    "firefly",
+    "firefly-iii",
+    "belvo",
+    "docker",
+    "node",
+    "finance",
+    "money",
+    "transactions",
+    "bank",
+    "banking"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://git.codingkitsune.com/codinglab/firefly-belvo-sync.git"
+  },
+  "scripts": {
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "lint:check": "eslint . && tsc --noEmit",
+    "lint:fix": "eslint --fix .",
+    "test:check": "bun test",
+    "build": "tsc",
+    "build:docker": "docker build -t git.codingkitsune.com/codinglab/firefly-belvo-sync:latest . && docker push git.codingkitsune.com/codinglab/firefly-belvo-sync:latest",
+    "start": "bun run ./src/index.ts",
+    "dev": "bun run --watch ./src/index.ts"
+  },
+  "dependencies": {
+    "@sentry/node": "8.47.0",
+    "@sentry/profiling-node": "8.47.0",
+    "dotenv": "16.4.7",
+    "express": "4.21.2",
+    "handlebars": "4.7.8",
+    "lodash": "4.17.21",
+    "luxon": "3.5.0",
+    "morgan": "1.10.0",
+    "node-cron": "3.0.3",
+    "typescript": "5.7.2",
+    "winston": "3.17.0",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.0",
+    "@types/lodash": "4.17.13",
+    "@types/luxon": "3.4.2",
+    "@types/morgan": "1.9.9",
+    "@types/node-cron": "3.0.11",
+    "bun-types": "1.1.42",
+    "eslint": "9.17.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-prettier": "5.2.1",
+    "globals": "15.14.0",
+    "prettier": "3.4.2",
+    "typescript-eslint": "8.18.2"
+  }
+}

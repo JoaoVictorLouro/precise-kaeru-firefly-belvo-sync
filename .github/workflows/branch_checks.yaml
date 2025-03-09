@@ -1,0 +1,66 @@
+name: 'Branch Checks'
+on:
+  - 'push'
+
+jobs:
+  run-checks:
+    name: 'Run branch checks'
+    runs-on: 'ubuntu'
+    container:
+      image: 'node:20-bookworm'
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+      - name: 'Install Bun'
+        uses: 'oven-sh/setup-bun@v2'
+        with:
+          bun-version: 'latest'
+      - name: 'Get yarn cache directory path'
+        id: 'yarn-cache-dir-path'
+        run: 'echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT'
+      - name: 'Get yarn lockfile (from the main branch)'
+        run: |
+          git fetch origin main
+          git show origin/main:yarn.lock > ./yarn-main.lock
+      - name: 'Get yarn lockfile hash (from current branch)'
+        uses: 'seepine/hash-files@v1'
+        id: 'lockfile-current-hash'
+        with:
+          patterns: '**/yarn.lock'
+      - name: 'Get yarn lockfile hash (from main branch)'
+        uses: 'seepine/hash-files@v1'
+        id: 'lockfile-main-hash'
+        with:
+          patterns: '**/yarn-main.lock'
+      - name: 'Fetch cached yarn dependencies'
+        uses: 'actions/cache/restore@v4'
+        id: 'restore-yarn-cache'
+        with:
+          path: '${{ steps.yarn-cache-dir-path.outputs.dir }}'
+          key: '${{ runner.os }}-yarn-${{ steps.lockfile-current-hash.outputs.hash }}'
+          restore-keys: '${{ runner.os }}-yarn-${{ steps.lockfile-main-hash.outputs.hash }}'
+      - name: 'Install dependencies'
+        run: 'yarn install --frozen-lockfile'
+      - name: 'Linter checks'
+        run: 'yarn lint:check'
+      - name: 'Test checks'
+        run: 'yarn test:check'
+      - name: 'Formatter checks (pre-check and auto-fix)'
+        run: 'yarn format:fix'
+        if: "startsWith(github.ref, 'refs/heads/automated/') && !startsWith(github.event.head_commit.message, 'Auto-fix formatter issues')"
+      - name: 'Commit auto-fix changes'
+        uses: 'EndBug/add-and-commit@v9'
+        if: "startsWith(github.ref, 'refs/heads/automated/') && !startsWith(github.event.head_commit.message, 'Auto-fix formatter issues')"
+        with:
+          message: 'Auto-fix formatter issues'
+          add: '-u'
+      - name: 'Formatter checks'
+        run: 'yarn format:check'
+      - name: 'Build checks'
+        run: 'yarn build'
+      - name: 'Save cached yarn dependencies'
+        uses: 'actions/cache/save@v4'
+        if: "!startsWith(github.ref, 'refs/heads/automated/') && steps.restore-yarn-cache.outputs.cache-hit != 'true'"
+        with:
+          path: '${{ steps.yarn-cache-dir-path.outputs.dir }}'
+          key: '${{ runner.os }}-yarn-${{ steps.lockfile-current-hash.outputs.hash }}'

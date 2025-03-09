@@ -1,0 +1,30 @@
+version: '3.8'
+
+networks:
+  firefly_belvo_devenv:
+    name: firefly_belvo_devenv
+
+services:
+  firefly_belvo_devcontainer:
+    build:
+      dockerfile: ./.devcontainer/dev-env/Dockerfile
+      context: ../..
+    container_name: firefly_belvo_devcontainer
+    user: node
+    hostname: firefly_belvo_devcontainer
+    environment:
+      ENVIRONMENT: 'development'
+      APP_PORT: '5173'
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    ports:
+      - 5173:5173
+    volumes:
+      - '../../:/workspace:delegated'
+      - './.zshrc:/home/node/.zshrc:cached'
+      - './.warprc:/home/node/.warprc:cached'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '~/Docker/firefly-belvo-sync:/config'
+    networks:
+      - 'firefly_belvo_devenv'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'

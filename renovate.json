@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "optimizeForDisabled": true,
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 10,
+  "dependencyDashboard": true,
+  "recreateWhen": "auto",
+  "rebaseWhen": "behind-base-branch",
+  "automergeStrategy": "squash",
+  "labels": ["automated", "dependency"],
+  "baseBranches": ["main"],
+  "branchPrefix": "automated/",
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["eslint"],
+      "groupName": "eslint"
+    },
+    {
+      "matchPackagePatterns": ["prettier"],
+      "groupName": "prettier"
+    },
+    {
+      "matchPackagePatterns": ["typescript-eslint"],
+      "groupName": "typescript-eslint"
+    },
+    {
+      "matchPackageNames": ["node"],
+      "groupName": "node",
+      "allowedVersions": "^20.0.0"
+    },
+    {
+      "matchPackageNames": ["bun"],
+      "groupName": "bun"
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": false
+    }
+  ]
+}

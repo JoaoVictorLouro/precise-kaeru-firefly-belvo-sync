@@ -1,0 +1,24 @@
+{
+  "recommendations": [
+    "adam-bender.commit-message-editor",
+    "christian-kohler.path-intellisense",
+    "dbaeumer.vscode-eslint",
+    "donjayamanne.githistory",
+    "dotjoshjohnson.xml",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "fr43nk.seito-openfile",
+    "github.copilot-labs",
+    "github.copilot",
+    "metaseed.metago",
+    "metaseed.metajump",
+    "metaseed.metaword",
+    "mgmcdermott.vscode-language-babel",
+    "ms-azuretools.vscode-docker",
+    "npxms.hide-gitignored",
+    "oderwat.indent-rainbow",
+    "peterschmalfeldt.explorer-exclude",
+    "wallabyjs.console-ninja",
+    "wallabyjs.quokka-vscode"
+  ]
+}

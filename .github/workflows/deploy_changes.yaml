@@ -1,0 +1,48 @@
+name: 'Deploy changes'
+on:
+  push:
+    branches:
+      - 'main'
+      - 'force_deploy'
+
+jobs:
+  build-and-push-image:
+    name: 'Build and push docker image'
+    runs-on: 'ubuntu'
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+      - name: 'Login to private Docker registry'
+        uses: 'docker/login-action@v3'
+        with:
+          registry: 'git.codingkitsune.com'
+          username: '${{ secrets.DEPLOYER_DOCKER_USERNAME }}'
+          password: '${{ secrets.DEPLOYER_DOCKER_PASSWORD }}'
+      - name: 'Build and push'
+        uses: 'docker/build-push-action@v6'
+        with:
+          push: true
+          tags: 'git.codingkitsune.com/codinglab/firefly-belvo-sync:latest'
+  deploy-to-server:
+    name: 'Deploy to server via Docker compose'
+    runs-on: 'ubuntu'
+    needs: 'build-and-push-image'
+    container:
+      image: 'git.codingkitsune.com/codinglab/docker-compose-deployer:latest'
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+      - name: 'Deploy to server'
+        run: |
+          docker-compose-deployer run 'mkdir -p "{{ "SERVER" | bitwarden: "app_data_folder" }}/Firefly/FireflyBelvoSync/log"'
+          docker-compose-deployer deploy ./docker-compose.yaml
+        env:
+          TARGET_HOST: '${{ secrets.DEPLOYER_TARGET_HOST }}'
+          TARGET_PORT: '${{ secrets.DEPLOYER_TARGET_PORT }}'
+          TARGET_USERNAME: '${{ secrets.DEPLOYER_TARGET_USERNAME }}'
+          TARGET_PRIVATE_KEY: '${{ secrets.DEPLOYER_TARGET_PRIVATE_KEY }}'
+          TARGET_PRIVATE_KEY_PASSPHRASE: '${{ secrets.DEPLOYER_TARGET_PRIVATE_KEY_PASSPHRASE }}'
+          BITWARDEN_SERVER: '${{ secrets.SECRETS_SERVER }}'
+          BITWARDEN_API_KEY_CLIENT_ID: '${{ secrets.SECRETS_CLIENT_ID }}'
+          BITWARDEN_API_KEY_CLIENT_SECRET: '${{ secrets.SECRETS_CLIENT_SECRET }}'
+          BITWARDEN_UNLOCK_PASSWORD: '${{ secrets.SECRETS_UNLOCK_PASSWORD }}'

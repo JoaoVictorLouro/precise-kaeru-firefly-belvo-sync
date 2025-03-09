@@ -1,0 +1,98 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Firefly III - Belvo Sync Connector</title>
+    <script
+      src="https://cdn.belvo.io/belvo-widget-1-stable.js"
+      async
+    ></script>
+    <style>
+      * {
+        font-family: Helvetica, sans-serif;
+      }
+      td,
+      th {
+        padding: 0.6rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="belvo"></div>
+
+    <h1>Firefly III - Belvo Sync Connector</h1>
+
+    <button
+      type="button"
+      id="add_new_account_btn"
+    >
+      Add new account link
+    </button>
+
+    {{#if hasLinks}}
+    <hr />
+    <h2>Registered Links:</h2>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>LINK ID</th>
+          <th>INSTITUTION</th>
+          <th>NICKNAME</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each links}}
+        <tr>
+          <td>{{this.link}}</td>
+          <td>{{this.institution}}</td>
+          <td>{{this.nickname}}</td>
+          <td>
+            <a href="/connect/remove/{{this.link}}"> DELETE </a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{/if}}
+
+    <script>
+      const btn = document.getElementById('add_new_account_btn');
+
+      btn.addEventListener('click', () => {
+        const belvoAccess = '{{BELVO_ACCESS}}';
+        belvoSDK
+          .createWidget(belvoAccess, {
+            locale: 'en',
+            show_abandon_survey: false,
+            callback: (link, institution) => {
+              const nickname = prompt('Please enter a nickname for this account link') || '';
+              fetch('/connect/add', {
+                method: 'POST',
+                body: JSON.stringify({ link, institution, nickname }),
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              })
+                .then(r => {
+                  if (r.ok) {
+                    return r.json();
+                  } else {
+                    throw new Error('Error adding account link, check logs...');
+                  }
+                })
+                .then(() => {
+                  alert(`Account link added successfully (${nickname || link} - ${institution})`);
+                  window.location.reload();
+                });
+            },
+          })
+          .build();
+      });
+    </script>
+  </body>
+</html>
