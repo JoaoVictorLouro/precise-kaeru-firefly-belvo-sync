@@ -13,16 +13,16 @@
   "branchPrefix": "automated/",
   "packageRules": [
     {
-      "matchPackagePatterns": ["eslint"],
-      "groupName": "eslint"
+      "groupName": "eslint",
+      "matchPackageNames": ["/eslint/"]
     },
     {
-      "matchPackagePatterns": ["prettier"],
-      "groupName": "prettier"
+      "groupName": "prettier",
+      "matchPackageNames": ["/prettier/"]
     },
     {
-      "matchPackagePatterns": ["typescript-eslint"],
-      "groupName": "typescript-eslint"
+      "groupName": "typescript-eslint",
+      "matchPackageNames": ["/typescript-eslint/"]
     },
     {
       "matchPackageNames": ["node"],
