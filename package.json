@@ -63,7 +63,7 @@
     "@types/luxon": "3.4.2",
     "@types/morgan": "1.9.9",
     "@types/node-cron": "3.0.11",
-    "bun-types": "1.1.42",
+    "bun-types": "1.2.4",
     "eslint": "9.17.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "5.2.1",
