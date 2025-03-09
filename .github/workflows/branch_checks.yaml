@@ -5,7 +5,7 @@ on:
 jobs:
   run-checks:
     name: 'Run branch checks'
-    runs-on: 'ubuntu'
+    runs-on: 'ubuntu-latest'
     container:
       image: 'node:20-bookworm'
     steps:
@@ -20,6 +20,7 @@ jobs:
         run: 'echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT'
       - name: 'Get yarn lockfile (from the main branch)'
         run: |
+          git config --global --add safe.directory "$(pwd)"
           git fetch origin main
           git show origin/main:yarn.lock > ./yarn-main.lock
       - name: 'Get yarn lockfile hash (from current branch)'
