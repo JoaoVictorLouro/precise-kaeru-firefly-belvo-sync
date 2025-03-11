@@ -886,10 +886,10 @@ braces@^3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-bun-types@1.2.4:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/bun-types/-/bun-types-1.2.4.tgz#8cfd807e6b69f577351075a5068687d6bcf767b9"
-  integrity sha512-nDPymR207ZZEoWD4AavvEaa/KZe/qlrbMSchqpQwovPZCKc7pwMoENjEtHgMKaAjJhy+x6vfqSBA1QU3bJgs0Q==
+bun-types@1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/bun-types/-/bun-types-1.2.5.tgz#1e090315033036fbd2eeae89adfd3327c3cc56f7"
+  integrity sha512-3oO6LVGGRRKI4kHINx5PIdIgnLRb7l/SprhzqXapmoYkFl5m4j6EvALvbDVuuBFaamB46Ap6HCUxIXNLCGy+tg==
   dependencies:
     "@types/node" "*"
     "@types/ws" "~8.5.10"
