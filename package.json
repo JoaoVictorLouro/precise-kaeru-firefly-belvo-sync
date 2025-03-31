@@ -47,7 +47,7 @@
     "@sentry/node": "9.5.0",
     "@sentry/profiling-node": "9.5.0",
     "dotenv": "16.4.7",
-    "express": "4.21.2",
+    "express": "5.1.0",
     "handlebars": "4.7.8",
     "lodash": "4.17.21",
     "luxon": "3.5.0",
@@ -58,7 +58,7 @@
     "zod": "3.24.2"
   },
   "devDependencies": {
-    "@types/express": "5.0.0",
+    "@types/express": "5.0.1",
     "@types/lodash": "4.17.16",
     "@types/luxon": "3.4.2",
     "@types/morgan": "1.9.9",
