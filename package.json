@@ -50,7 +50,7 @@
     "express": "4.21.2",
     "handlebars": "4.7.8",
     "lodash": "4.17.21",
-    "luxon": "3.5.0",
+    "luxon": "3.6.1",
     "morgan": "1.10.0",
     "node-cron": "3.0.3",
     "typescript": "5.8.2",
@@ -60,7 +60,7 @@
   "devDependencies": {
     "@types/express": "5.0.0",
     "@types/lodash": "4.17.16",
-    "@types/luxon": "3.4.2",
+    "@types/luxon": "3.6.2",
     "@types/morgan": "1.9.9",
     "@types/node-cron": "3.0.11",
     "bun-types": "1.2.5",
