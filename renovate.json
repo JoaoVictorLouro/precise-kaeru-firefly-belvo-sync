@@ -1,9 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
-  "optimizeForDisabled": true,
-  "prConcurrentLimit": 10,
-  "prHourlyLimit": 10,
+  "prConcurrentLimit": 1,
+  "schedule": ["* 8,15 11,26 * *"],
   "dependencyDashboard": true,
   "recreateWhen": "auto",
   "rebaseWhen": "behind-base-branch",
